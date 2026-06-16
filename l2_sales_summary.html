@@ -43,6 +43,7 @@ tr:hover td:first-child {background:#f0f7ff}
   th,td {padding:5px 7px}
 }
 
+
 /* === Google Login === */
 .glogin-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 24px;background:#fff;border:1px solid #dadce0;border-radius:4px;font-size:14px;color:#3c4043;cursor:pointer;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.08);font-family:inherit}.glogin-btn:hover{background:#f8fafc;box-shadow:0 2px 6px rgba(0,0,0,.12);border-color:#c4c7cc}.glogin-icon{flex-shrink:0}.login-overlay{position:fixed;inset:0;background:#f8fafc;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column}
 .login-box{text-align:center;padding:48px 40px;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:400px;width:90%}
@@ -56,25 +57,33 @@ tr:hover td:first-child {background:#f0f7ff}
 .user-bar .logout-btn:hover{background:#fef2f2;border-color:#fca5a5}
 @media(max-width:768px){.login-box{padding:32px 24px}.login-logo{font-size:22px}.user-bar{font-size:11px;gap:6px;padding:6px 10px}.user-bar .user-avatar{width:22px;height:22px}}
 
-/* === Admin Panel === */
+/* Whitelist Admin Panel */
 .admin-btn{font-size:11px;color:#2563eb;cursor:pointer;padding:2px 8px;border:1px solid #bfdbfe;border-radius:4px;background:#eff6ff;transition:all .2s;margin-left:2px}.admin-btn:hover{background:#dbeafe;border-color:#93c5fd}
 .admin-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100001;align-items:center;justify-content:center}
-.admin-modal{background:#fff;border-radius:12px;padding:24px;max-width:440px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,.12);max-height:80vh;overflow-y:auto}
+.admin-modal{background:#fff;border-radius:12px;padding:24px;max-width:480px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,.12);max-height:85vh;overflow-y:auto}
 .admin-modal h3{font-size:16px;color:#1e293b;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
 .admin-modal .close-btn{background:none;border:none;font-size:20px;color:#94a3b8;cursor:pointer;padding:0;line-height:1}
 .admin-modal .close-btn:hover{color:#475569}
-.sub-account-list{list-style:none;margin:0 0 16px;max-height:200px;overflow-y:auto}
-.sub-account-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid #f1f5f9;font-size:13px}
-.sub-account-item:last-child{border-bottom:none}
-.sub-account-item .email{color:#334155;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sub-account-item .del-btn{background:none;border:1px solid #fecaca;color:#ef4444;font-size:11px;padding:2px 8px;border-radius:4px;cursor:pointer;transition:all .2s;margin-left:8px}
-.sub-account-item .del-btn:hover{background:#fef2f2;border-color:#fca5a5}
-.sub-account-add{display:flex;gap:8px}
-.sub-account-add input{flex:1;padding:8px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:13px;outline:none;transition:border .2s}
-.sub-account-add input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.1)}
-.sub-account-add button{padding:8px 16px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;transition:background .2s;white-space:nowrap}
-.sub-account-add button:hover{background:#1d4ed8}
-.admin-empty{text-align:center;color:#94a3b8;font-size:13px;padding:16px 0}
+.whitelist-list{list-style:none;margin:0 0 16px;max-height:240px;overflow-y:auto}
+.whitelist-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid #f1f5f9;font-size:13px}
+.whitelist-item:last-child{border-bottom:none}
+.whitelist-item .email{color:#334155;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.whitelist-item .tag-super{display:inline-block;font-size:10px;color:#2563eb;background:#eff6ff;border:1px solid #bfdbfe;border-radius:3px;padding:1px 6px;margin-left:8px;font-weight:600;flex-shrink:0}
+.whitelist-item .del-btn{background:none;border:1px solid #fecaca;color:#ef4444;font-size:11px;padding:2px 8px;border-radius:4px;cursor:pointer;transition:all .2s;margin-left:8px;flex-shrink:0}
+.whitelist-item .del-btn:hover{background:#fef2f2;border-color:#fca5a5}
+.whitelist-add-row{display:flex;gap:8px;margin-bottom:12px}
+.whitelist-add-row input{flex:1;padding:8px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:13px;outline:none;transition:border .2s}
+.whitelist-add-row input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.1)}
+.whitelist-add-row button{padding:8px 16px;background:#2563eb;color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;transition:background .2s;white-space:nowrap}
+.whitelist-add-row button:hover{background:#1d4ed8}
+.whitelist-empty{text-align:center;color:#94a3b8;font-size:13px;padding:16px 0}
+.admin-section-title{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;margin-top:16px}
+.admin-debug{font-size:11px;color:#94a3b8;cursor:pointer;margin-top:16px;user-select:none;text-align:center}
+.admin-debug:hover{color:#64748b}
+.admin-debug-content{display:none;background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:10px;margin-top:8px;font-size:11px;color:#475569;max-height:120px;overflow:auto;word-break:break-all;font-family:monospace}
+.admin-debug-content.show{display:block}
+.admin-reset-btn{font-size:11px;color:#ef4444;background:none;border:1px solid #fecaca;border-radius:4px;padding:3px 10px;cursor:pointer;margin-top:12px;transition:all .2s}
+.admin-reset-btn:hover{background:#fef2f2;border-color:#fca5a5}
 
 </style>
 <script src="https://accounts.google.com/gsi/client"></script>
@@ -83,29 +92,41 @@ tr:hover td:first-child {background:#f0f7ff}
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
     <div class="login-logo">Purple Leaf</div>
-    <div class="login-subtitle">产品目录管理系统</div>
+    <div class="login-subtitle">Product Catalog Management</div>
     <button id="googleLoginBtn" class="glogin-btn" onclick="triggerGoogleLogin()">
       <svg class="glogin-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      使用 Google 账号登录
+      Sign in with Google
     </button>
-    <div class="login-desc">请使用授权 Google 账号登录<br>如有疑问请联系管理员</div>
+    <div class="login-desc">Please sign in with an authorized Google account<br>Contact admin if you need access</div>
   </div>
 </div>
 <div class="user-bar" id="userBar" style="display:none">
   <img class="user-avatar" id="userAvatar" src="" alt="">
   <span class="user-name" id="userName"></span>
-  <button class="admin-btn" id="adminBtn" onclick="showAdminPanel()" style="display:none">管理子账号</button>
-  <button class="logout-btn" id="logoutBtn">登出</button>
+  <button class="admin-btn" id="adminBtn" onclick="showAdminPanel()">Whitelist</button>
+  <button class="logout-btn" id="logoutBtn">Logout</button>
 </div>
 
 <div class="admin-modal-overlay" id="adminModalOverlay">
   <div class="admin-modal">
-    <h3>管理子账号<button class="close-btn" onclick="hideAdminPanel()">&times;</button></h3>
-    <ul class="sub-account-list" id="subAccountList"></ul>
-    <div class="admin-empty" id="adminEmpty" style="display:none">暂无子账号</div>
-    <div class="sub-account-add">
-      <input type="email" id="newSubEmail" placeholder="输入子账号邮箱" onkeydown="if(event.key==='Enter')addSubAccount()">
-      <button onclick="addSubAccount()">添加</button>
+    <h3>Whitelist Management<button class="close-btn" onclick="closeAdminPanel()">&times;</button></h3>
+    <ul class="whitelist-list" id="whitelistList"></ul>
+    <div class="whitelist-empty" id="whitelistEmpty" style="display:none">Whitelist is empty</div>
+    <div class="admin-section-title" id="adminAddTitle">Add User</div>
+    <div class="whitelist-add-row" id="adminAddRow">
+      <input type="email" id="newWhitelistEmail" placeholder="Enter Google email" onkeydown="if(event.key==='Enter')addToWhitelist()">
+      <button onclick="addToWhitelist()">Add</button>
+    </div>
+    <div id="adminNonSuperNotice" style="display:none;font-size:12px;color:#94a3b8;text-align:center;margin-top:8px;">Only super admin can manage whitelist</div>
+    <div id="adminSuperActions" style="display:none;margin-top:12px;text-align:center;">
+      <div class="admin-debug" onclick="toggleDebug()">Debug Info</div>
+      <div class="admin-debug-content" id="adminDebugContent"></div>
+      <button class="admin-reset-btn" onclick="resetWhitelist()">Clear Cache &amp; Reset Whitelist</button>
+    </div>
+  </div>
+</div></div>    <div class="sub-account-add">
+      <input type="email" id="newSubEmail" placeholder="输入子账号邮箱" onkeydown="if(event.key==='Enter')addToWhitelist()">
+      <button onclick="addToWhitelist()">添加</button>
     </div>
   </div>
 </div>
@@ -151,20 +172,203 @@ tr:hover td:first-child {background:#f0f7ff}
 </div>
 
 <script>
-// === Google OAuth Login ===
-var SUPREME_ADMIN='xin9265@gmail.com';function getAllowedEmails(){var s=[];try{var d=localStorage.getItem('pl_sub_accounts');if(d)s=JSON.parse(d)}catch(ex){}if(!Array.isArray(s)){s=[]}s=s.filter(function(e){return typeof e==='string'}).map(function(e){return e.trim().toLowerCase()});return[SUPREME_ADMIN].concat(s)}function isSupremeAdmin(e){return e.trim().toLowerCase()===SUPREME_ADMIN}
-function parseJwt(e){try{var t=e.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');return JSON.parse(atob(t))}catch(e){return null}}
-function handleCredentialResponse(e){var t=parseJwt(e.credential);if(!t||!t.email)return;var em=t.email.trim().toLowerCase();var allowed;try{allowed=getAllowedEmails()}catch(ex){alert('登录验证出错，请刷新页面重试。');return}if(allowed.indexOf(em)===-1){alert('该账号 ('+t.email+') 不在白名单中，无法访问。\n如有权限问题请联系管理员。');google.accounts.id.disableAutoSelect();return}localStorage.setItem('pl_auth',JSON.stringify({credential:e.credential,email:t.email,name:t.name,picture:t.picture,loginTime:Date.now()}));showUser(t)}
-function showUser(e){document.getElementById('loginOverlay').style.display='none';var t=document.getElementById('userBar');t.style.display='flex';document.getElementById('userAvatar').src=e.picture;document.getElementById('userName').textContent=e.name;document.getElementById('adminBtn').style.display=isSupremeAdmin(e.email)?'inline-block':'none'}
-function doLogout(){google.accounts.id.disableAutoSelect();localStorage.removeItem('pl_auth');document.getElementById('loginOverlay').style.display='flex';document.getElementById('userBar').style.display='none'}
-function initGoogleLogin(){var e=document.getElementById('loginOverlay');e.style.display='flex';var t=localStorage.getItem('pl_auth');if(t){try{var n=JSON.parse(t),o=parseJwt(n.credential);if(o&&o.exp&&o.exp*1000>Date.now()&&getAllowedEmails().indexOf(o.email.trim().toLowerCase())!==-1){showUser(o);return}}catch(e){}}if(typeof google!=='undefined'&&google.accounts){google.accounts.id.initialize({client_id:'1083342039492-04nb9sf0frsj8leab6s72ovg1ncuhf7s.apps.googleusercontent.com',callback:handleCredentialResponse,auto_select:false,cancel_on_tap_outside:false});google.accounts.id.prompt()}}
-function triggerGoogleLogin(){if(typeof google!=='undefined'&&google.accounts){google.accounts.id.prompt()}else{alert('登录服务加载中，请刷新页面重试。')}}
-function showAdminPanel(){document.getElementById('adminModalOverlay').style.display='flex';loadSubAccounts()}
-function hideAdminPanel(){document.getElementById('adminModalOverlay').style.display='none'}
-function loadSubAccounts(){var l=document.getElementById('subAccountList');var e=document.getElementById('adminEmpty');var s=[];try{var d=localStorage.getItem('pl_sub_accounts');if(d)s=JSON.parse(d)}catch(ex){}l.innerHTML='';if(s.length===0){e.style.display='block';return}e.style.display='none';s.forEach(function(a){var li=document.createElement('li');li.className='sub-account-item';li.innerHTML='<span class="email">'+a+'</span><button class="del-btn" onclick="removeSubAccount(\''+a+'\')">移除</button>';l.appendChild(li)})}
-function addSubAccount(){var i=document.getElementById('newSubEmail');var e=i.value.trim().toLowerCase();if(!e){alert('请输入邮箱地址');return}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){alert('请输入有效的邮箱地址');return}if(e===SUPREME_ADMIN){alert('超级管理员邮箱不可添加为子账号');return}var s=[];try{var d=localStorage.getItem('pl_sub_accounts');if(d)s=JSON.parse(d)}catch(ex){}if(!Array.isArray(s)){s=[]}if(s.indexOf(e)!==-1){alert('该邮箱已在子账号列表中');return}s.push(e);try{localStorage.setItem('pl_sub_accounts',JSON.stringify(s))}catch(ex){alert('保存失败，可能存储空间不足。');return}i.value='';loadSubAccounts()}
-function removeSubAccount(e){if(!confirm('确定要移除子账号 '+e+' 吗？'))return;var s=[];try{var d=localStorage.getItem('pl_sub_accounts');if(d)s=JSON.parse(d)}catch(ex){}if(!Array.isArray(s)){s=[]}var em=e.trim().toLowerCase();s=s.filter(function(a){return typeof a==='string'&&a.trim().toLowerCase()!==em});try{localStorage.setItem('pl_sub_accounts',JSON.stringify(s))}catch(ex){alert('保存失败，可能存储空间不足。');return}loadSubAccounts()}
-document.addEventListener('DOMContentLoaded',function(){initGoogleLogin();document.getElementById('logoutBtn').addEventListener('click',doLogout)});
+// === Google OAuth Login v2 (Unified Whitelist) ===
+var CLIENT_ID='1083342039492-04nb9sf0frsj8leab6s72ovg1ncuhf7s.apps.googleusercontent.com';
+var SUPER_ADMIN='xin9265@gmail.com';
+var WHITELIST_KEY='pl_whitelist';
+
+function norm(e){return (e||'').trim().toLowerCase();}
+
+function loadWhitelist(){
+  var raw=localStorage.getItem(WHITELIST_KEY);
+  var arr=[];
+  try{if(raw)arr=JSON.parse(raw);}catch(ex){arr=[];}
+  if(!Array.isArray(arr))arr=[];
+  var seen={},cleaned=[];
+  for(var i=0;i<arr.length;i++){
+    if(typeof arr[i]!=='string')continue;
+    var e=norm(arr[i]);
+    if(!e||!e.includes('@')||seen[e])continue;
+    seen[e]=true;
+    cleaned.push(e);
+  }
+  if(cleaned.indexOf(SUPER_ADMIN)===-1)cleaned.unshift(SUPER_ADMIN);
+  return cleaned;
+}
+
+function saveWhitelist(lst){
+  try{localStorage.setItem(WHITELIST_KEY,JSON.stringify(lst));}
+  catch(ex){alert('Save failed: storage may be full.');}
+}
+
+function isSuper(email){return norm(email)===SUPER_ADMIN;}
+
+function parseJwt(token){
+  try{
+    var p=token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
+    return JSON.parse(atob(p));
+  }catch(ex){return null;}
+}
+
+function handleCredentialResponse(resp){
+  var jwt=parseJwt(resp.credential);
+  if(!jwt||!jwt.email)return;
+  var email=norm(jwt.email);
+  var whitelist=loadWhitelist();
+  if(whitelist.indexOf(email)===-1){
+    alert('Account ('+jwt.email+') is not in the whitelist.\nContact admin if you need access.');
+    google.accounts.id.disableAutoSelect();
+    return;
+  }
+  localStorage.setItem('pl_auth',JSON.stringify({
+    credential:resp.credential,email:jwt.email,name:jwt.name,
+    picture:jwt.picture,loginTime:Date.now()
+  }));
+  showUser(jwt);
+}
+
+function showUser(user){
+  document.getElementById('loginOverlay').style.display='none';
+  var bar=document.getElementById('userBar');
+  bar.style.display='flex';
+  document.getElementById('userAvatar').src=user.picture;
+  document.getElementById('userName').textContent=user.name;
+  document.getElementById('logoutBtn').onclick=doLogout;
+}
+
+function doLogout(){
+  google.accounts.id.disableAutoSelect();
+  localStorage.removeItem('pl_auth');
+  document.getElementById('loginOverlay').style.display='flex';
+  document.getElementById('userBar').style.display='none';
+}
+
+function initGoogleLogin(){
+  document.getElementById('loginOverlay').style.display='flex';
+  var session=localStorage.getItem('pl_auth');
+  if(session){
+    try{
+      var s=JSON.parse(session);
+      var jwt=parseJwt(s.credential);
+      if(jwt&&jwt.exp&&jwt.exp*1000>Date.now()){
+        var email=norm(jwt.email);
+        var whitelist=loadWhitelist();
+        if(whitelist.indexOf(email)!==-1){
+          if(!localStorage.getItem(WHITELIST_KEY))saveWhitelist(whitelist);
+          showUser(jwt);return;
+        }
+      }
+    }catch(ex){}
+  }
+  if(!localStorage.getItem(WHITELIST_KEY))saveWhitelist([SUPER_ADMIN]);
+  else saveWhitelist(loadWhitelist());
+  if(typeof google!=='undefined'&&google.accounts){
+    google.accounts.id.initialize({
+      client_id:CLIENT_ID,callback:handleCredentialResponse,
+      auto_select:false,cancel_on_tap_outside:false
+    });
+    google.accounts.id.prompt();
+  }
+}
+
+function triggerGoogleLogin(){
+  if(typeof google!=='undefined'&&google.accounts)google.accounts.id.prompt();
+  else alert('Login service is loading. Please refresh the page.');
+}
+
+function showAdminPanel(){
+  document.getElementById('adminModalOverlay').style.display='flex';
+  renderWhitelist();
+}
+
+function closeAdminPanel(){
+  document.getElementById('adminModalOverlay').style.display='none';
+}
+
+function renderWhitelist(){
+  var whitelist=loadWhitelist();
+  var list=document.getElementById('whitelistList');
+  var empty=document.getElementById('whitelistEmpty');
+  var addTitle=document.getElementById('adminAddTitle');
+  var addRow=document.getElementById('adminAddRow');
+  var nonSuper=document.getElementById('adminNonSuperNotice');
+  var superActions=document.getElementById('adminSuperActions');
+  list.innerHTML='';
+
+  var currentUser=null;
+  var session=localStorage.getItem('pl_auth');
+  if(session){
+    try{currentUser=norm(JSON.parse(session).email);}catch(ex){}
+  }
+  var isSuperUser=currentUser&&isSuper(currentUser);
+
+  whitelist.forEach(function(email){
+    var li=document.createElement('li');
+    li.className='whitelist-item';
+    var isSuperEntry=isSuper(email);
+    var tagHtml=isSuperEntry?'<span class="tag-super">SUPER ADMIN</span>':'';
+    var delHtml='';
+    if(isSuperUser && !isSuperEntry){
+      delHtml='<button class="del-btn" onclick="removeFromWhitelist('+JSON.stringify(email)+')">Remove</button>';
+    }
+    li.innerHTML='<span class="email">'+email+'</span>'+tagHtml+delHtml;
+    list.appendChild(li);
+  });
+  empty.style.display=whitelist.length===0?'block':'none';
+
+  if(isSuperUser){
+    addTitle.style.display='block';
+    addRow.style.display='flex';
+    nonSuper.style.display='none';
+    superActions.style.display='block';
+  }else{
+    addTitle.style.display='none';
+    addRow.style.display='none';
+    nonSuper.style.display='block';
+    superActions.style.display='none';
+  }
+
+  var debugContent=document.getElementById('adminDebugContent');
+  var raw=localStorage.getItem(WHITELIST_KEY);
+  debugContent.textContent=raw||'(empty)';
+  debugContent.classList.remove('show');
+}
+
+function addToWhitelist(){
+  var input=document.getElementById('newWhitelistEmail');
+  var email=norm(input.value);
+  if(!email){alert('Please enter an email address.');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email address.');return;}
+  var whitelist=loadWhitelist();
+  if(whitelist.indexOf(email)!==-1){alert('This email is already in the whitelist.');return;}
+  whitelist.push(email);
+  saveWhitelist(whitelist);
+  input.value='';
+  renderWhitelist();
+}
+
+function removeFromWhitelist(email){
+  if(!confirm('Remove '+email+' from whitelist?'))return;
+  if(isSuper(email)){alert('Cannot remove super admin.');return;}
+  var whitelist=loadWhitelist();
+  whitelist=whitelist.filter(function(e){return e!==email;});
+  saveWhitelist(whitelist);
+  renderWhitelist();
+}
+
+function toggleDebug(){
+  document.getElementById('adminDebugContent').classList.toggle('show');
+}
+
+function resetWhitelist(){
+  if(!confirm('Reset whitelist to default?\nThis will remove all sub-accounts.'))return;
+  saveWhitelist([SUPER_ADMIN]);
+  renderWhitelist();
+}
+
+document.addEventListener('DOMContentLoaded',function(){initGoogleLogin();});
+});
+document.getElementById('logoutBtn').addEventListener('click',doLogout)});
 
 var CHART_DATA = [{"name":"伞座","total_monthly":[1213.0,2014.0,7792.0,12034.0,18727.0],"total_sum":41780.0,"amazon_US_monthly":[720.0,1137.0,4205.0,6177.0,9442.0],"amazon_US_sum":21681.0,"shopify_US_monthly":[187.0,297.0,1147.0,1956.0,3238.0],"shopify_US_sum":6825.0,"wayfair_US_monthly":[63.0,172.0,637.0,1101.0,1493.0],"wayfair_US_sum":3466.0,"homedepot_monthly":[126.0,200.0,1012.0,1697.0,2732.0],"homedepot_sum":5767.0,"target_monthly":[12.0,21.0,131.0,169.0,251.0],"target_sum":584.0,"overstock_monthly":[45.0,84.0,224.0,315.0,639.0],"overstock_sum":1307.0,"lowes_monthly":[39.0,69.0,313.0,416.0,598.0],"lowes_sum":1435.0,"walmart_monthly":[21.0,34.0,123.0,203.0,334.0],"walmart_sum":715.0,"mom":55.6},{"name":"小罗马伞","total_monthly":[749.0,1205.0,4706.0,6837.0,10809.0],"total_sum":24306.0,"amazon_US_monthly":[540.0,861.0,3103.0,4184.0,6606.0],"amazon_US_sum":15294.0,"shopify_US_monthly":[58.0,101.0,371.0,667.0,987.0],"shopify_US_sum":2184.0,"wayfair_US_monthly":[22.0,40.0,280.0,491.0,693.0],"wayfair_US_sum":1526.0,"homedepot_monthly":[64.0,72.0,431.0,756.0,1332.0],"homedepot_sum":2655.0,"target_monthly":[9.0,13.0,107.0,140.0,209.0],"target_sum":478.0,"overstock_monthly":[20.0,56.0,172.0,221.0,436.0],"overstock_sum":905.0,"lowes_monthly":[22.0,23.0,147.0,228.0,301.0],"lowes_sum":721.0,"walmart_monthly":[14.0,39.0,95.0,150.0,245.0],"walmart_sum":543.0,"mom":58.1},{"name":"餐椅","total_monthly":[1326.0,1731.0,4553.5,5681.0,7349.0],"total_sum":20640.5,"amazon_US_monthly":[781.0,906.0,2406.5,2860.0,3558.5],"amazon_US_sum":10512.0,"shopify_US_monthly":[161.0,224.0,578.0,672.0,1019.0],"shopify_US_sum":2654.0,"wayfair_US_monthly":[214.0,304.0,642.0,1002.0,1202.0],"wayfair_US_sum":3364.0,"homedepot_monthly":[57.0,87.0,271.0,331.0,640.0],"homedepot_sum":1386.0,"target_monthly":[11.0,0.0,53.0,53.0,79.0],"target_sum":196.0,"overstock_monthly":[42.0,160.0,325.0,439.0,461.5],"overstock_sum":1427.5,"lowes_monthly":[60.0,50.0,219.0,261.0,296.0],"lowes_sum":886.0,"walmart_monthly":[0.0,0.0,59.0,63.0,93.0],"walmart_sum":215.0,"mom":29.4},{"name":"躺床","total_monthly":[961.0,1379.0,4330.0,5393.0,7932.0],"total_sum":19995.0,"amazon_US_monthly":[719.0,971.0,2992.0,3642.0,5126.0],"amazon_US_sum":13450.0,"shopify_US_monthly":[83.0,92.0,440.0,458.0,772.0],"shopify_US_sum":1845.0,"wayfair_US_monthly":[20.0,97.0,139.0,240.0,420.0],"wayfair_US_sum":916.0,"homedepot_monthly":[67.0,85.0,409.0,633.0,1015.0],"homedepot_sum":2209.0,"target_monthly":[4.0,11.0,9.0,12.0,24.0],"target_sum":60.0,"overstock_monthly":[6.0,21.0,84.0,90.0,169.0],"overstock_sum":370.0,"lowes_monthly":[21.0,48.0,178.0,208.0,270.0],"lowes_sum":725.0,"walmart_monthly":[41.0,54.0,79.0,110.0,136.0],"walmart_sum":420.0,"mom":47.1},{"name":"大罗马伞","total_monthly":[599.0,995.0,3913.0,5422.0,8490.0],"total_sum":19419.0,"amazon_US_monthly":[325.0,458.0,1873.0,2341.0,3620.0],"amazon_US_sum":8617.0,"shopify_US_monthly":[129.0,198.0,797.0,1197.0,2047.0],"shopify_US_sum":4368.0,"wayfair_US_monthly":[41.0,133.0,393.0,650.0,848.0],"wayfair_US_sum":2065.0,"homedepot_monthly":[53.0,104.0,499.0,815.0,1278.0],"homedepot_sum":2749.0,"target_monthly":[3.0,10.0,28.0,38.0,51.0],"target_sum":130.0,"overstock_monthly":[24.0,46.0,129.0,164.0,298.0],"overstock_sum":661.0,"lowes_monthly":[11.0,37.0,139.0,133.0,211.0],"lowes_sum":531.0,"walmart_monthly":[13.0,9.0,55.0,84.0,137.0],"walmart_sum":298.0,"mom":56.6},{"name":"硬顶铁皮棚","total_monthly":[644.0,1123.0,4122.0,6161.0,5668.0],"total_sum":17718.0,"amazon_US_monthly":[288.0,497.0,1849.0,2507.0,2403.0],"amazon_US_sum":7544.0,"shopify_US_monthly":[135.0,221.0,892.0,1352.0,1283.0],"shopify_US_sum":3883.0,"wayfair_US_monthly":[26.0,43.0,137.0,257.0,207.0],"wayfair_US_sum":670.0,"homedepot_monthly":[110.0,204.0,686.0,1280.0,1018.0],"homedepot_sum":3298.0,"target_monthly":[0.0,1.0,9.0,17.0,26.0],"target_sum":53.0,"overstock_monthly":[5.0,12.0,46.0,46.0,50.0],"overstock_sum":159.0,"lowes_monthly":[72.0,133.0,483.0,677.0,639.0],"lowes_sum":2004.0,"walmart_monthly":[8.0,12.0,20.0,25.0,42.0],"walmart_sum":107.0,"mom":-8.0},{"name":"吧椅","total_monthly":[1212.0,1332.5,2485.0,3150.5,4337.5],"total_sum":12517.5,"amazon_US_monthly":[917.0,937.5,1789.0,2182.5,2866.5],"amazon_US_sum":8692.5,"shopify_US_monthly":[133.0,94.0,211.0,314.0,509.0],"shopify_US_sum":1261.0,"wayfair_US_monthly":[66.0,177.0,223.0,353.0,424.0],"wayfair_US_sum":1243.0,"homedepot_monthly":[43.0,52.0,125.0,133.0,195.0],"homedepot_sum":548.0,"target_monthly":[7.0,9.0,10.0,34.0,56.0],"target_sum":116.0,"overstock_monthly":[37.0,54.0,106.0,100.0,214.0],"overstock_sum":511.0,"lowes_monthly":[2.0,0.0,0.0,2.0,7.0],"lowes_sum":11.0,"walmart_monthly":[7.0,9.0,21.0,32.0,66.0],"walmart_sum":135.0,"mom":37.7},{"name":"大米兰伞","total_monthly":[491.0,787.0,2355.0,2807.0,3983.0],"total_sum":10423.0,"amazon_US_monthly":[429.0,666.0,1897.0,2256.0,3172.0],"amazon_US_sum":8420.0,"shopify_US_monthly":[34.0,51.0,200.0,254.0,446.0],"shopify_US_sum":985.0,"wayfair_US_monthly":[8.0,15.0,51.0,86.0,90.0],"wayfair_US_sum":250.0,"homedepot_monthly":[17.0,50.0,170.0,159.0,199.0],"homedepot_sum":595.0,"target_monthly":[0.0,0.0,3.0,7.0,12.0],"target_sum":22.0,"overstock_monthly":[0.0,0.0,2.0,5.0,5.0],"overstock_sum":12.0,"lowes_monthly":[0.0,3.0,18.0,32.0,46.0],"lowes_sum":99.0,"walmart_monthly":[3.0,2.0,14.0,8.0,13.0],"walmart_sum":40.0,"mom":41.9},{"name":"伞罩","total_monthly":[370.0,470.0,1430.0,2394.0,3575.0],"total_sum":8239.0,"amazon_US_monthly":[179.0,221.0,778.0,1205.0,1789.0],"amazon_US_sum":4172.0,"shopify_US_monthly":[156.0,175.0,471.0,851.0,1224.0],"shopify_US_sum":2877.0,"wayfair_US_monthly":[3.0,10.0,12.0,25.0,61.0],"wayfair_US_sum":111.0,"homedepot_monthly":[32.0,51.0,164.0,312.0,478.0],"homedepot_sum":1037.0,"target_monthly":[0.0,0.0,1.0,0.0,0.0],"target_sum":1.0,"overstock_monthly":[0.0,13.0,4.0,1.0,23.0],"overstock_sum":41.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":49.3},{"name":"灯饰","total_monthly":[304.0,548.0,1919.0,2599.0,2066.0],"total_sum":7436.0,"amazon_US_monthly":[130.0,204.0,847.0,1190.0,950.0],"amazon_US_sum":3321.0,"shopify_US_monthly":[64.0,111.0,427.0,634.0,547.0],"shopify_US_sum":1783.0,"wayfair_US_monthly":[14.0,9.0,31.0,53.0,35.0],"wayfair_US_sum":142.0,"homedepot_monthly":[64.0,157.0,366.0,448.0,186.0],"homedepot_sum":1221.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[10.0,17.0,59.0,43.0,47.0],"overstock_sum":176.0,"lowes_monthly":[20.0,43.0,180.0,224.0,301.0],"lowes_sum":768.0,"walmart_monthly":[2.0,7.0,9.0,7.0,0.0],"walmart_sum":25.0,"mom":-20.5},{"name":"百叶棚","total_monthly":[350.0,549.0,1636.0,2120.0,2161.0],"total_sum":6816.0,"amazon_US_monthly":[129.0,198.0,614.0,706.0,751.0],"amazon_US_sum":2398.0,"shopify_US_monthly":[106.0,172.0,460.0,683.0,626.0],"shopify_US_sum":2047.0,"wayfair_US_monthly":[23.0,40.0,108.0,154.0,138.0],"wayfair_US_sum":463.0,"homedepot_monthly":[54.0,79.0,266.0,350.0,360.0],"homedepot_sum":1109.0,"target_monthly":[2.0,2.0,9.0,21.0,8.0],"target_sum":42.0,"overstock_monthly":[8.0,11.0,53.0,66.0,66.0],"overstock_sum":204.0,"lowes_monthly":[27.0,46.0,124.0,122.0,202.0],"lowes_sum":521.0,"walmart_monthly":[1.0,1.0,2.0,18.0,10.0],"walmart_sum":32.0,"mom":1.9},{"name":"餐桌","total_monthly":[262.0,453.0,1175.0,1416.0,1991.0],"total_sum":5297.0,"amazon_US_monthly":[136.0,231.0,584.0,715.0,996.0],"amazon_US_sum":2662.0,"shopify_US_monthly":[44.0,85.0,199.0,187.0,323.0],"shopify_US_sum":838.0,"wayfair_US_monthly":[42.0,55.0,144.0,202.0,231.0],"wayfair_US_sum":674.0,"homedepot_monthly":[13.0,25.0,84.0,94.0,186.0],"homedepot_sum":402.0,"target_monthly":[3.0,0.0,14.0,14.0,21.0],"target_sum":52.0,"overstock_monthly":[9.0,41.0,78.0,115.0,128.0],"overstock_sum":371.0,"lowes_monthly":[15.0,16.0,57.0,71.0,79.0],"lowes_sum":238.0,"walmart_monthly":[0.0,0.0,15.0,18.0,27.0],"walmart_sum":60.0,"mom":40.6},{"name":"葡萄架","total_monthly":[130.0,246.0,1241.0,1726.0,1879.0],"total_sum":5222.0,"amazon_US_monthly":[65.0,121.0,768.0,1022.0,1134.0],"amazon_US_sum":3110.0,"shopify_US_monthly":[30.0,28.0,162.0,249.0,231.0],"shopify_US_sum":700.0,"wayfair_US_monthly":[17.0,27.0,105.0,197.0,215.0],"wayfair_US_sum":561.0,"homedepot_monthly":[5.0,33.0,114.0,131.0,132.0],"homedepot_sum":415.0,"target_monthly":[0.0,0.0,0.0,4.0,2.0],"target_sum":6.0,"overstock_monthly":[1.0,1.0,9.0,10.0,11.0],"overstock_sum":32.0,"lowes_monthly":[2.0,9.0,34.0,45.0,55.0],"lowes_sum":145.0,"walmart_monthly":[10.0,27.0,49.0,68.0,99.0],"walmart_sum":253.0,"mom":8.9},{"name":"中柱伞","total_monthly":[82.0,199.0,756.0,1134.0,1790.0],"total_sum":3961.0,"amazon_US_monthly":[59.0,159.0,597.0,829.0,1306.0],"amazon_US_sum":2950.0,"shopify_US_monthly":[11.0,18.0,68.0,112.0,234.0],"shopify_US_sum":443.0,"wayfair_US_monthly":[1.0,7.0,7.0,17.0,22.0],"wayfair_US_sum":54.0,"homedepot_monthly":[5.0,8.0,46.0,91.0,102.0],"homedepot_sum":252.0,"target_monthly":[1.0,0.0,3.0,9.0,6.0],"target_sum":19.0,"overstock_monthly":[1.0,1.0,0.0,3.0,9.0],"overstock_sum":14.0,"lowes_monthly":[1.0,5.0,28.0,45.0,72.0],"lowes_sum":151.0,"walmart_monthly":[3.0,1.0,7.0,28.0,39.0],"walmart_sum":78.0,"mom":57.8},{"name":"户外沙发","total_monthly":[210.0,378.0,859.0,1171.0,1262.0],"total_sum":3880.0,"amazon_US_monthly":[94.0,141.0,470.0,494.0,560.0],"amazon_US_sum":1759.0,"shopify_US_monthly":[83.0,145.0,240.0,322.0,451.0],"shopify_US_sum":1241.0,"wayfair_US_monthly":[8.0,8.0,37.0,20.0,26.0],"wayfair_US_sum":99.0,"homedepot_monthly":[1.0,34.0,28.0,111.0,47.0],"homedepot_sum":221.0,"target_monthly":[0.0,0.0,0.0,0.0,16.0],"target_sum":16.0,"overstock_monthly":[18.0,50.0,64.0,207.0,142.0],"overstock_sum":481.0,"lowes_monthly":[6.0,0.0,20.0,17.0,20.0],"lowes_sum":63.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":7.8},{"name":"秋千","total_monthly":[117.0,195.0,688.0,1037.0,1361.0],"total_sum":3398.0,"amazon_US_monthly":[71.0,115.0,348.0,554.0,810.0],"amazon_US_sum":1898.0,"shopify_US_monthly":[4.0,11.0,45.0,67.0,99.0],"shopify_US_sum":226.0,"wayfair_US_monthly":[16.0,13.0,88.0,126.0,156.0],"wayfair_US_sum":399.0,"homedepot_monthly":[16.0,29.0,83.0,131.0,153.0],"homedepot_sum":412.0,"target_monthly":[0.0,0.0,0.0,0.0,2.0],"target_sum":2.0,"overstock_monthly":[1.0,3.0,5.0,18.0,30.0],"overstock_sum":57.0,"lowes_monthly":[8.0,21.0,105.0,122.0,102.0],"lowes_sum":358.0,"walmart_monthly":[1.0,3.0,14.0,19.0,9.0],"walmart_sum":46.0,"mom":31.2},{"name":"百叶棚围布","total_monthly":[158.0,318.0,771.0,1011.0,689.0],"total_sum":2947.0,"amazon_US_monthly":[48.0,107.0,270.0,389.0,176.0],"amazon_US_sum":990.0,"shopify_US_monthly":[76.0,134.0,333.0,441.0,436.0],"shopify_US_sum":1420.0,"wayfair_US_monthly":[15.0,34.0,66.0,70.0,35.0],"wayfair_US_sum":220.0,"homedepot_monthly":[15.0,25.0,61.0,53.0,24.0],"homedepot_sum":178.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[4.0,18.0,41.0,58.0,18.0],"overstock_sum":139.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":-31.8},{"name":"凉棚天篷和窗帘","total_monthly":[153.0,212.0,645.0,902.0,885.0],"total_sum":2797.0,"amazon_US_monthly":[65.0,82.0,256.0,305.0,347.0],"amazon_US_sum":1055.0,"shopify_US_monthly":[37.0,61.0,164.0,261.0,214.0],"shopify_US_sum":737.0,"wayfair_US_monthly":[40.0,65.0,206.0,305.0,264.0],"wayfair_US_sum":880.0,"homedepot_monthly":[8.0,2.0,15.0,21.0,44.0],"homedepot_sum":90.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[3.0,2.0,4.0,10.0,16.0],"walmart_sum":35.0,"mom":-1.9},{"name":"百叶棚立面百叶窗","total_monthly":[123.0,180.0,436.0,593.0,511.0],"total_sum":1843.0,"amazon_US_monthly":[34.0,66.0,158.0,181.0,132.0],"amazon_US_sum":571.0,"shopify_US_monthly":[61.0,100.0,204.0,305.0,304.0],"shopify_US_sum":974.0,"wayfair_US_monthly":[4.0,7.0,19.0,31.0,31.0],"wayfair_US_sum":92.0,"homedepot_monthly":[24.0,7.0,55.0,62.0,33.0],"homedepot_sum":181.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,14.0,11.0],"overstock_sum":25.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":-13.8},{"name":"阳光房","total_monthly":[54.0,88.0,216.0,311.0,392.0],"total_sum":1061.0,"amazon_US_monthly":[14.0,31.0,38.0,67.0,98.0],"amazon_US_sum":248.0,"shopify_US_monthly":[11.0,18.0,50.0,66.0,93.0],"shopify_US_sum":238.0,"wayfair_US_monthly":[10.0,10.0,27.0,64.0,58.0],"wayfair_US_sum":169.0,"homedepot_monthly":[7.0,13.0,40.0,33.0,76.0],"homedepot_sum":169.0,"target_monthly":[1.0,0.0,0.0,0.0,0.0],"target_sum":1.0,"overstock_monthly":[8.0,15.0,32.0,41.0,34.0],"overstock_sum":130.0,"lowes_monthly":[3.0,1.0,29.0,39.0,33.0],"lowes_sum":105.0,"walmart_monthly":[0.0,0.0,0.0,1.0,0.0],"walmart_sum":1.0,"mom":26.0},{"name":"伞配件","total_monthly":[61.0,37.0,201.0,289.0,389.0],"total_sum":977.0,"amazon_US_monthly":[45.0,26.0,116.0,164.0,217.0],"amazon_US_sum":568.0,"shopify_US_monthly":[16.0,8.0,63.0,104.0,141.0],"shopify_US_sum":332.0,"wayfair_US_monthly":[0.0,0.0,4.0,9.0,11.0],"wayfair_US_sum":24.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,2.0,3.0,1.0],"overstock_sum":6.0,"lowes_monthly":[0.0,3.0,16.0,9.0,19.0],"lowes_sum":47.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":34.6},{"name":"休闲椅","total_monthly":[58.0,133.0,226.0,230.0,326.0],"total_sum":973.0,"amazon_US_monthly":[48.0,102.0,130.0,114.0,178.0],"amazon_US_sum":572.0,"shopify_US_monthly":[8.0,24.0,28.0,49.0,65.0],"shopify_US_sum":174.0,"wayfair_US_monthly":[0.0,0.0,14.0,6.0,7.0],"wayfair_US_sum":27.0,"homedepot_monthly":[0.0,0.0,9.0,12.0,2.0],"homedepot_sum":23.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[2.0,6.0,35.0,47.0,72.0],"overstock_sum":162.0,"lowes_monthly":[0.0,1.0,8.0,2.0,2.0],"lowes_sum":13.0,"walmart_monthly":[0.0,0.0,2.0,0.0,0.0],"walmart_sum":2.0,"mom":41.7},{"name":"大罗马伞退货件","total_monthly":[12.0,38.0,141.0,224.0,328.0],"total_sum":743.0,"amazon_US_monthly":[2.0,7.0,31.0,50.0,97.0],"amazon_US_sum":187.0,"shopify_US_monthly":[8.0,9.0,38.0,50.0,85.0],"shopify_US_sum":190.0,"wayfair_US_monthly":[0.0,2.0,11.0,7.0,15.0],"wayfair_US_sum":35.0,"homedepot_monthly":[2.0,14.0,47.0,102.0,105.0],"homedepot_sum":270.0,"target_monthly":[0.0,1.0,2.0,0.0,2.0],"target_sum":5.0,"overstock_monthly":[0.0,3.0,3.0,7.0,10.0],"overstock_sum":23.0,"lowes_monthly":[0.0,2.0,9.0,8.0,11.0],"lowes_sum":30.0,"walmart_monthly":[0.0,0.0,0.0,0.0,3.0],"walmart_sum":3.0,"mom":46.4},{"name":"百叶棚灯带","total_monthly":[53.0,67.0,193.0,221.0,178.0],"total_sum":712.0,"amazon_US_monthly":[15.0,23.0,66.0,59.0,57.0],"amazon_US_sum":220.0,"shopify_US_monthly":[23.0,27.0,70.0,102.0,81.0],"shopify_US_sum":303.0,"wayfair_US_monthly":[2.0,2.0,22.0,27.0,18.0],"wayfair_US_sum":71.0,"homedepot_monthly":[11.0,11.0,28.0,23.0,17.0],"homedepot_sum":90.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[2.0,4.0,7.0,10.0,5.0],"overstock_sum":28.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":-19.5},{"name":"花园椅","total_monthly":[14.0,32.0,82.0,120.0,284.0],"total_sum":532.0,"amazon_US_monthly":[10.0,30.0,35.0,64.0,97.0],"amazon_US_sum":236.0,"shopify_US_monthly":[4.0,2.0,46.0,36.0,99.0],"shopify_US_sum":187.0,"wayfair_US_monthly":[0.0,0.0,1.0,0.0,0.0],"wayfair_US_sum":1.0,"homedepot_monthly":[0.0,0.0,0.0,4.0,50.0],"homedepot_sum":54.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,8.0,21.0],"overstock_sum":29.0,"lowes_monthly":[0.0,0.0,0.0,8.0,17.0],"lowes_sum":25.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":136.7},{"name":"收纳箱","total_monthly":[50.0,50.0,97.0,116.0,134.0],"total_sum":447.0,"amazon_US_monthly":[16.0,25.0,38.0,61.0,82.0],"amazon_US_sum":222.0,"shopify_US_monthly":[25.0,16.0,30.0,35.0,20.0],"shopify_US_sum":126.0,"wayfair_US_monthly":[6.0,3.0,6.0,5.0,3.0],"wayfair_US_sum":23.0,"homedepot_monthly":[1.0,5.0,23.0,13.0,28.0],"homedepot_sum":70.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[1.0,1.0,0.0,0.0,0.0],"overstock_sum":2.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[1.0,0.0,0.0,2.0,1.0],"walmart_sum":4.0,"mom":15.5},{"name":"烧烤架","total_monthly":[19.0,43.0,106.0,114.0,73.0],"total_sum":355.0,"amazon_US_monthly":[11.0,23.0,52.0,41.0,32.0],"amazon_US_sum":159.0,"shopify_US_monthly":[4.0,5.0,20.0,22.0,11.0],"shopify_US_sum":62.0,"wayfair_US_monthly":[1.0,1.0,2.0,6.0,2.0],"wayfair_US_sum":12.0,"homedepot_monthly":[1.0,3.0,15.0,28.0,16.0],"homedepot_sum":63.0,"target_monthly":[0.0,0.0,1.0,0.0,1.0],"target_sum":2.0,"overstock_monthly":[0.0,2.0,4.0,1.0,1.0],"overstock_sum":8.0,"lowes_monthly":[2.0,9.0,12.0,16.0,9.0],"lowes_sum":48.0,"walmart_monthly":[0.0,0.0,0.0,0.0,1.0],"walmart_sum":1.0,"mom":-36.0},{"name":"吧桌","total_monthly":[39.0,21.0,54.0,84.0,68.0],"total_sum":266.0,"amazon_US_monthly":[32.0,20.0,51.0,71.0,52.0],"amazon_US_sum":226.0,"shopify_US_monthly":[2.0,1.0,2.0,3.0,3.0],"shopify_US_sum":11.0,"wayfair_US_monthly":[5.0,0.0,1.0,7.0,4.0],"wayfair_US_sum":17.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,3.0,9.0],"walmart_sum":12.0,"mom":-19.0},{"name":"家具样品","total_monthly":[6.0,16.0,50.0,59.0,74.0],"total_sum":205.0,"amazon_US_monthly":[5.0,13.0,39.0,48.0,52.0],"amazon_US_sum":157.0,"shopify_US_monthly":[0.0,3.0,6.0,8.0,19.0],"shopify_US_sum":36.0,"wayfair_US_monthly":[1.0,0.0,0.0,0.0,1.0],"wayfair_US_sum":2.0,"homedepot_monthly":[0.0,0.0,3.0,0.0,0.0],"homedepot_sum":3.0,"target_monthly":[0.0,0.0,1.0,0.0,0.0],"target_sum":1.0,"overstock_monthly":[0.0,0.0,0.0,3.0,2.0],"overstock_sum":5.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,1.0,0.0,0.0],"walmart_sum":1.0,"mom":25.4},{"name":"庭院家具罩","total_monthly":[0.0,12.0,38.0,62.0,58.0],"total_sum":170.0,"amazon_US_monthly":[0.0,12.0,38.0,62.0,58.0],"amazon_US_sum":170.0,"shopify_US_monthly":[0.0,0.0,0.0,0.0,0.0],"shopify_US_sum":0.0,"wayfair_US_monthly":[0.0,0.0,0.0,0.0,0.0],"wayfair_US_sum":0.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":-6.5},{"name":"户外沙发配件","total_monthly":[1.0,1.0,6.0,7.0,12.0],"total_sum":27.0,"amazon_US_monthly":[1.0,0.0,6.0,4.0,6.0],"amazon_US_sum":17.0,"shopify_US_monthly":[0.0,1.0,0.0,3.0,4.0],"shopify_US_sum":8.0,"wayfair_US_monthly":[0.0,0.0,0.0,0.0,0.0],"wayfair_US_sum":0.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,2.0],"target_sum":2.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":71.4},{"name":"吊椅","total_monthly":[3.0,5.0,4.0,7.0,0.0],"total_sum":19.0,"amazon_US_monthly":[3.0,5.0,4.0,7.0,0.0],"amazon_US_sum":19.0,"shopify_US_monthly":[0.0,0.0,0.0,0.0,0.0],"shopify_US_sum":0.0,"wayfair_US_monthly":[0.0,0.0,0.0,0.0,0.0],"wayfair_US_sum":0.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":-100.0},{"name":"靠墙棚","total_monthly":[0.0,0.0,0.0,0.0,0.0],"total_sum":0.0,"amazon_US_monthly":[0.0,0.0,0.0,0.0,0.0],"amazon_US_sum":0.0,"shopify_US_monthly":[0.0,0.0,0.0,0.0,0.0],"shopify_US_sum":0.0,"wayfair_US_monthly":[0.0,0.0,0.0,0.0,0.0],"wayfair_US_sum":0.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":0},{"name":"靠墙棚灯带","total_monthly":[0.0,0.0,0.0,0.0,0.0],"total_sum":0.0,"amazon_US_monthly":[0.0,0.0,0.0,0.0,0.0],"amazon_US_sum":0.0,"shopify_US_monthly":[0.0,0.0,0.0,0.0,0.0],"shopify_US_sum":0.0,"wayfair_US_monthly":[0.0,0.0,0.0,0.0,0.0],"wayfair_US_sum":0.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":0},{"name":"靠墙棚蜂巢帘","total_monthly":[0.0,0.0,0.0,0.0,0.0],"total_sum":0.0,"amazon_US_monthly":[0.0,0.0,0.0,0.0,0.0],"amazon_US_sum":0.0,"shopify_US_monthly":[0.0,0.0,0.0,0.0,0.0],"shopify_US_sum":0.0,"wayfair_US_monthly":[0.0,0.0,0.0,0.0,0.0],"wayfair_US_sum":0.0,"homedepot_monthly":[0.0,0.0,0.0,0.0,0.0],"homedepot_sum":0.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[0.0,0.0,0.0,0.0,0.0],"overstock_sum":0.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":0}];
 
