@@ -44,8 +44,12 @@ tr:hover td:first-child {background:#f0f7ff}
 }
 
 
-/* === Google Login === */
-.glogin-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 24px;background:#fff;border:1px solid #dadce0;border-radius:4px;font-size:14px;color:#3c4043;cursor:pointer;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.08);font-family:inherit}.glogin-btn:hover{background:#f8fafc;box-shadow:0 2px 6px rgba(0,0,0,.12);border-color:#c4c7cc}.glogin-icon{flex-shrink:0}.login-overlay{position:fixed;inset:0;background:#f8fafc;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.login-form{display:flex;flex-direction:column;gap:12px;margin-bottom:8px}
+.login-form input{padding:10px 14px;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;transition:border .2s;width:100%;box-sizing:border-box}
+.login-form input:focus{border-color:#2563eb;box-shadow:0 0 0 2px rgba(37,99,235,.1)}
+.login-form button{padding:10px 14px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s}
+.login-form button:hover{background:#1d4ed8}
+.login-error{color:#ef4444;font-size:12px;min-height:18px;text-align:center}.login-overlay{position:fixed;inset:0;background:#f8fafc;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column}
 .login-box{text-align:center;padding:48px 40px;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:400px;width:90%}
 .login-logo{font-size:28px;font-weight:700;color:#2563eb;margin-bottom:4px}
 .login-subtitle{font-size:15px;color:#475569;margin-bottom:28px}
@@ -86,22 +90,24 @@ tr:hover td:first-child {background:#f0f7ff}
 .admin-reset-btn:hover{background:#fef2f2;border-color:#fca5a5}
 
 </style>
-<script src="https://accounts.google.com/gsi/client"></script>
+</script>
 </head>
 <body>
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
     <div class="login-logo">Purple Leaf</div>
     <div class="login-subtitle">Product Catalog Management</div>
-    <button id="googleLoginBtn" class="glogin-btn" onclick="triggerGoogleLogin()">
-      <svg class="glogin-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      Sign in with Google
-    </button>
-    <div class="login-desc">Please sign in with an authorized Google account<br>Contact admin if you need access</div>
+    <div class="login-form">
+      <input type="email" id="loginEmail" placeholder="Email" autocomplete="email">
+      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
+      <button onclick="doLogin()">Sign In</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+    <div class="login-desc">Contact admin if you need access</div>
   </div>
 </div>
 <div class="user-bar" id="userBar" style="display:none">
-  <img class="user-avatar" id="userAvatar" src="" alt="">
+  
   <span class="user-name" id="userName"></span>
   <button class="admin-btn" id="adminBtn" onclick="showAdminPanel()">Whitelist</button>
   <button class="logout-btn" id="logoutBtn">Logout</button>
@@ -112,9 +118,10 @@ tr:hover td:first-child {background:#f0f7ff}
     <h3>Whitelist Management<button class="close-btn" onclick="closeAdminPanel()">&times;</button></h3>
     <ul class="whitelist-list" id="whitelistList"></ul>
     <div class="whitelist-empty" id="whitelistEmpty" style="display:none">Whitelist is empty</div>
-    <div class="admin-section-title" id="adminAddTitle">Add User</div>
+    <div class="admin-section-title" id="adminAddTitle">Add User (Email &amp; Password)</div>
     <div class="whitelist-add-row" id="adminAddRow">
-      <input type="email" id="newWhitelistEmail" placeholder="Enter Google email" onkeydown="if(event.key==='Enter')addToWhitelist()">
+      <input type="email" id="newWhitelistEmail" placeholder="Email" onkeydown="if(event.key==='Enter')addToWhitelist()">
+      <input type="password" id="newWhitelistPassword" placeholder="Password" onkeydown="if(event.key==='Enter')addToWhitelist()">
       <button onclick="addToWhitelist()">Add</button>
     </div>
     <div id="adminNonSuperNotice" style="display:none;font-size:12px;color:#94a3b8;text-align:center;margin-top:8px;">Only super admin can manage whitelist</div>
@@ -124,12 +131,7 @@ tr:hover td:first-child {background:#f0f7ff}
       <button class="admin-reset-btn" onclick="resetWhitelist()">Clear Cache &amp; Reset Whitelist</button>
     </div>
   </div>
-</div></div>    <div class="sub-account-add">
-      <input type="email" id="newSubEmail" placeholder="输入子账号邮箱" onkeydown="if(event.key==='Enter')addToWhitelist()">
-      <button onclick="addToWhitelist()">添加</button>
-    </div>
-  </div>
-</div>
+</div></div>
 
 
 
@@ -171,12 +173,57 @@ tr:hover td:first-child {background:#f0f7ff}
 </div>
 
 <script>
-// === Google OAuth Login v2 (Unified Whitelist) ===
-var CLIENT_ID='1083342039492-04nb9sf0frsj8leab6s72ovg1ncuhf7s.apps.googleusercontent.com';
+// === Custom Login v3 (Email/Password) ===
 var SUPER_ADMIN='xin9265@gmail.com';
 var WHITELIST_KEY='pl_whitelist';
+var USERS_KEY='pl_users';
+var SESSION_KEY='pl_session';
 
 function norm(e){return (e||'').trim().toLowerCase();}
+
+// Lightweight SHA-256 (pure JS, no external libs)
+function sha256(str){
+  function rotr(x,n){return(x>>>n)|(x<<(32-n));}
+  function ch(x,y,z){return(x&y)^(~x&z);}
+  function maj(x,y,z){return(x&y)^(x&z)^(y&z);}
+  function bsig0(x){return rotr(x,2)^rotr(x,13)^rotr(x,22);}
+  function bsig1(x){return rotr(x,6)^rotr(x,11)^rotr(x,25);}
+  function ssig0(x){return rotr(x,7)^rotr(x,18)^(x>>>3);}
+  function ssig1(x){return rotr(x,17)^rotr(x,19)^(x>>>10);}
+  var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  var msg=[];
+  for(var i=0;i<str.length;i++){msg.push(str.charCodeAt(i)&0xff);}
+  var ml=msg.length*8;
+  msg.push(0x80);
+  while((msg.length*8)%512!==448)msg.push(0);
+  for(var i=0;i<8;i++)msg.push(0);
+  msg[msg.length-1]=ml>>>0;
+  msg[msg.length-2]=(ml/0x100000000)>>>0;
+  var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  for(var bi=0;bi<msg.length;bi+=64){
+    var W=new Array(64);
+    for(var t=0;t<16;t++)W[t]=msg[bi+t*4]<<24|msg[bi+t*4+1]<<16|msg[bi+t*4+2]<<8|msg[bi+t*4+3];
+    for(var t=16;t<64;t++)W[t]=(ssig1(W[t-2])+W[t-7]+ssig0(W[t-15])+W[t-16])>>>0;
+    var a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
+    for(var t=0;t<64;t++){
+      var T1=(h+bsig1(e)+ch(e,f,g)+K[t]+W[t])>>>0;
+      var T2=(bsig0(a)+maj(a,b,c))>>>0;
+      h=g;g=f;f=e;e=(d+T1)>>>0;d=c;c=b;b=a;a=(T1+T2)>>>0;
+    }
+    H[0]=(H[0]+a)>>>0;H[1]=(H[1]+b)>>>0;H[2]=(H[2]+c)>>>0;H[3]=(H[3]+d)>>>0;
+    H[4]=(H[4]+e)>>>0;H[5]=(H[5]+f)>>>0;H[6]=(H[6]+g)>>>0;H[7]=(H[7]+h)>>>0;
+  }
+  var hex='';
+  for(var i=0;i<8;i++){var v=H[i];hex+=('00000000'+v.toString(16)).slice(-8);}
+  return hex;
+}
 
 function loadWhitelist(){
   var raw=localStorage.getItem(WHITELIST_KEY);
@@ -200,94 +247,83 @@ function saveWhitelist(lst){
   catch(ex){alert('Save failed: storage may be full.');}
 }
 
+function loadUsers(){
+  var raw=localStorage.getItem(USERS_KEY);
+  try{return raw?JSON.parse(raw):{};}catch(ex){return {};}
+}
+
+function saveUsers(obj){
+  try{localStorage.setItem(USERS_KEY,JSON.stringify(obj));}
+  catch(ex){alert('Save failed: storage may be full.');}
+}
+
 function isSuper(email){return norm(email)===SUPER_ADMIN;}
 
-function parseJwt(token){
-  try{
-    var p=token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
-    return JSON.parse(atob(p));
-  }catch(ex){return null;}
+function initUsers(){
+  var users=loadUsers();
+  if(!users[SUPER_ADMIN]){users[SUPER_ADMIN]=sha256('admin123');saveUsers(users);}
+  return users;
 }
 
-function handleCredentialResponse(resp){
-  var jwt=parseJwt(resp.credential);
-  if(!jwt||!jwt.email)return;
-  var email=norm(jwt.email);
+function doLogin(){
+  var emailEl=document.getElementById('loginEmail');
+  var passEl=document.getElementById('loginPassword');
+  var errEl=document.getElementById('loginError');
+  var email=norm(emailEl.value);
+  var pass=passEl.value;
+  errEl.textContent='';
+  if(!email){errEl.textContent='Please enter your email.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){errEl.textContent='Invalid email format.';return;}
+  if(!pass){errEl.textContent='Please enter your password.';return;}
   var whitelist=loadWhitelist();
-  if(whitelist.indexOf(email)===-1){
-    alert('Account ('+jwt.email+') is not in the whitelist.\nContact admin if you need access.');
-    google.accounts.id.disableAutoSelect();
-    return;
-  }
-  localStorage.setItem('pl_auth',JSON.stringify({
-    credential:resp.credential,email:jwt.email,name:jwt.name,
-    picture:jwt.picture,loginTime:Date.now()
-  }));
-  showUser(jwt);
-}
-
-function showUser(user){
-  document.getElementById('loginOverlay').style.display='none';
-  var bar=document.getElementById('userBar');
-  bar.style.display='flex';
-  document.getElementById('userAvatar').src=user.picture;
-  document.getElementById('userName').textContent=user.name;
-  document.getElementById('logoutBtn').onclick=doLogout;
+  if(whitelist.indexOf(email)===-1){errEl.textContent='Account is not authorized.';return;}
+  var users=initUsers();
+  var storedHash=users[email];
+  if(!storedHash){errEl.textContent='No password set for this account. Contact admin.';return;}
+  var inputHash=sha256(pass);
+  if(inputHash!==storedHash){errEl.textContent='Incorrect password.';return;}
+  localStorage.setItem(SESSION_KEY,JSON.stringify({email:email,loginTime:Date.now()}));
+  showUser(email);
 }
 
 function doLogout(){
-  google.accounts.id.disableAutoSelect();
-  localStorage.removeItem('pl_auth');
+  localStorage.removeItem(SESSION_KEY);
   document.getElementById('loginOverlay').style.display='flex';
   document.getElementById('userBar').style.display='none';
+  var passEl=document.getElementById('loginPassword');
+  if(passEl)passEl.value='';
+  var errEl=document.getElementById('loginError');
+  if(errEl)errEl.textContent='';
 }
 
-function initGoogleLogin(){
+function showUser(email){
+  document.getElementById('loginOverlay').style.display='none';
+  var bar=document.getElementById('userBar');
+  bar.style.display='flex';
+  document.getElementById('userName').textContent=email;
+  document.getElementById('logoutBtn').onclick=doLogout;
+}
+
+function initLogin(){
   document.getElementById('loginOverlay').style.display='flex';
-  var session=localStorage.getItem('pl_auth');
+  var session=localStorage.getItem(SESSION_KEY);
   if(session){
     try{
       var s=JSON.parse(session);
-      var jwt=parseJwt(s.credential);
-      if(jwt&&jwt.exp&&jwt.exp*1000>Date.now()){
-        var email=norm(jwt.email);
+      if(s.email&&s.loginTime&&(Date.now()-s.loginTime)<86400000){
         var whitelist=loadWhitelist();
-        if(whitelist.indexOf(email)!==-1){
-          if(!localStorage.getItem(WHITELIST_KEY))saveWhitelist(whitelist);
-          showUser(jwt);return;
+        if(whitelist.indexOf(norm(s.email))!==-1){
+          showUser(s.email);return;
         }
       }
     }catch(ex){}
   }
   if(!localStorage.getItem(WHITELIST_KEY))saveWhitelist([SUPER_ADMIN]);
   else saveWhitelist(loadWhitelist());
-  if(typeof google!=='undefined'&&google.accounts){
-    google.accounts.id.initialize({
-      client_id:CLIENT_ID,callback:handleCredentialResponse,
-      auto_select:false,cancel_on_tap_outside:false
-    });
-    google.accounts.id.prompt();
-  }
-}
-
-function triggerGoogleLogin(){
-  if(typeof google==='undefined'||!google.accounts){
-    alert('Login service is loading. Please refresh the page.');
-    return;
-  }
-  google.accounts.id.prompt(function(notification){
-    if(notification.isNotDisplayed()||notification.isSkippedMoment()){
-      var cc=google.accounts.oauth2.initCodeClient({
-        client_id:CLIENT_ID,
-        scope:'openid profile email',
-        ux_mode:'popup',
-        callback:function(resp){
-          if(resp&&resp.code)google.accounts.id.prompt();
-        }
-      });
-      cc.requestCode();
-    }
-  });
+  initUsers();
+  // Focus email input
+  var emailEl=document.getElementById('loginEmail');
+  if(emailEl)emailEl.focus();
 }
 
 function showAdminPanel(){
@@ -310,7 +346,7 @@ function renderWhitelist(){
   list.innerHTML='';
 
   var currentUser=null;
-  var session=localStorage.getItem('pl_auth');
+  var session=localStorage.getItem(SESSION_KEY);
   if(session){
     try{currentUser=norm(JSON.parse(session).email);}catch(ex){}
   }
@@ -350,14 +386,22 @@ function renderWhitelist(){
 
 function addToWhitelist(){
   var input=document.getElementById('newWhitelistEmail');
+  var passInput=document.getElementById('newWhitelistPassword');
   var email=norm(input.value);
+  var pass=passInput?passInput.value:'';
   if(!email){alert('Please enter an email address.');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email address.');return;}
+  if(!pass){alert('Please enter a password for the new user.');return;}
+  if(pass.length<4){alert('Password must be at least 4 characters.');return;}
   var whitelist=loadWhitelist();
   if(whitelist.indexOf(email)!==-1){alert('This email is already in the whitelist.');return;}
   whitelist.push(email);
   saveWhitelist(whitelist);
+  var users=initUsers();
+  users[email]=sha256(pass);
+  saveUsers(users);
   input.value='';
+  if(passInput)passInput.value='';
   renderWhitelist();
 }
 
@@ -367,6 +411,9 @@ function removeFromWhitelist(email){
   var whitelist=loadWhitelist();
   whitelist=whitelist.filter(function(e){return e!==email;});
   saveWhitelist(whitelist);
+  var users=loadUsers();
+  delete users[email];
+  saveUsers(users);
   renderWhitelist();
 }
 
@@ -375,12 +422,14 @@ function toggleDebug(){
 }
 
 function resetWhitelist(){
-  if(!confirm('Reset whitelist to default?\nThis will remove all sub-accounts.'))return;
+  if(!confirm('Reset whitelist and all passwords to default?\nThis will remove all sub-accounts.'))return;
   saveWhitelist([SUPER_ADMIN]);
+  saveUsers({});
+  initUsers();
   renderWhitelist();
 }
 
-document.addEventListener('DOMContentLoaded',function(){initGoogleLogin();});
+document.addEventListener('DOMContentLoaded',function(){initLogin();});
 
 var CHART_DATA = [{"name":"遮阳伞","total_monthly":[3577.0,5745.0,21294.0,31141.0,48091.0],"total_sum":109848.0,"amazon_US_monthly":[2299.0,3535.0,12600.0,17206.0,26249.0],"amazon_US_sum":61889.0,"shopify_US_monthly":[599.0,857.0,3155.0,5191.0,8402.0],"shopify_US_sum":18204.0,"wayfair_US_monthly":[138.0,379.0,1395.0,2386.0,3233.0],"wayfair_US_sum":7531.0,"homedepot_monthly":[299.0,499.0,2369.0,3932.0,6226.0],"homedepot_sum":13325.0,"target_monthly":[25.0,45.0,275.0,363.0,531.0],"target_sum":1239.0,"overstock_monthly":[90.0,203.0,536.0,719.0,1421.0],"overstock_sum":2969.0,"lowes_monthly":[73.0,142.0,670.0,871.0,1258.0],"lowes_sum":3014.0,"walmart_monthly":[54.0,85.0,294.0,473.0,771.0],"walmart_sum":1677.0,"mom":54.4},{"name":"露台座位","total_monthly":[3691.0,4807.5,12368.5,15618.5,21589.5],"total_sum":58075.0,"amazon_US_monthly":[2549.0,3066.5,7704.5,9423.5,12636.0],"amazon_US_sum":35379.5,"shopify_US_monthly":[393.0,447.0,1348.0,1596.0,2563.0],"shopify_US_sum":6347.0,"wayfair_US_monthly":[316.0,591.0,1107.0,1727.0,2209.0],"wayfair_US_sum":5950.0,"homedepot_monthly":[183.0,253.0,897.0,1244.0,2055.0],"homedepot_sum":4632.0,"target_monthly":[22.0,20.0,72.0,99.0,161.0],"target_sum":374.0,"overstock_monthly":[88.0,244.0,555.0,702.0,967.5],"overstock_sum":2556.5,"lowes_monthly":[91.0,120.0,510.0,603.0,694.0],"lowes_sum":2018.0,"walmart_monthly":[49.0,66.0,175.0,224.0,304.0],"walmart_sum":818.0,"mom":38.2},{"name":"棚架","total_monthly":[967.0,1572.0,4922.0,6573.0,6303.0],"total_sum":20337.0,"amazon_US_monthly":[356.0,597.0,2132.0,2662.0,2597.0],"amazon_US_sum":8344.0,"shopify_US_monthly":[333.0,522.0,1393.0,2041.0,1892.0],"shopify_US_sum":6181.0,"wayfair_US_monthly":[101.0,175.0,526.0,784.0,701.0],"wayfair_US_sum":2287.0,"homedepot_monthly":[117.0,157.0,539.0,640.0,610.0],"homedepot_sum":2063.0,"target_monthly":[2.0,2.0,9.0,25.0,10.0],"target_sum":48.0,"overstock_monthly":[15.0,34.0,110.0,158.0,111.0],"overstock_sum":428.0,"lowes_monthly":[29.0,55.0,158.0,167.0,257.0],"lowes_sum":666.0,"walmart_monthly":[14.0,30.0,55.0,96.0,125.0],"walmart_sum":320.0,"mom":-4.1},{"name":"铁皮棚","total_monthly":[717.0,1254.0,4444.0,6586.0,6133.0],"total_sum":19134.0,"amazon_US_monthly":[313.0,551.0,1939.0,2615.0,2533.0],"amazon_US_sum":7951.0,"shopify_US_monthly":[150.0,244.0,962.0,1440.0,1387.0],"shopify_US_sum":4183.0,"wayfair_US_monthly":[37.0,54.0,166.0,327.0,267.0],"wayfair_US_sum":851.0,"homedepot_monthly":[118.0,220.0,741.0,1341.0,1110.0],"homedepot_sum":3530.0,"target_monthly":[1.0,1.0,10.0,17.0,27.0],"target_sum":56.0,"overstock_monthly":[13.0,29.0,82.0,88.0,85.0],"overstock_sum":297.0,"lowes_monthly":[77.0,143.0,524.0,732.0,681.0],"lowes_sum":2157.0,"walmart_monthly":[8.0,12.0,20.0,26.0,43.0],"walmart_sum":109.0,"mom":-6.9},{"name":"户外灯饰","total_monthly":[304.0,548.0,1919.0,2599.0,2066.0],"total_sum":7436.0,"amazon_US_monthly":[130.0,204.0,847.0,1190.0,950.0],"amazon_US_sum":3321.0,"shopify_US_monthly":[64.0,111.0,427.0,634.0,547.0],"shopify_US_sum":1783.0,"wayfair_US_monthly":[14.0,9.0,31.0,53.0,35.0],"wayfair_US_sum":142.0,"homedepot_monthly":[64.0,157.0,366.0,448.0,186.0],"homedepot_sum":1221.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[10.0,17.0,59.0,43.0,47.0],"overstock_sum":176.0,"lowes_monthly":[20.0,43.0,180.0,224.0,301.0],"lowes_sum":768.0,"walmart_monthly":[2.0,7.0,9.0,7.0,0.0],"walmart_sum":25.0,"mom":-20.5},{"name":"庭院桌","total_monthly":[301.0,474.0,1229.0,1500.0,2059.0],"total_sum":5563.0,"amazon_US_monthly":[168.0,251.0,635.0,786.0,1048.0],"amazon_US_sum":2888.0,"shopify_US_monthly":[46.0,86.0,201.0,190.0,326.0],"shopify_US_sum":849.0,"wayfair_US_monthly":[47.0,55.0,145.0,209.0,235.0],"wayfair_US_sum":691.0,"homedepot_monthly":[13.0,25.0,84.0,94.0,186.0],"homedepot_sum":402.0,"target_monthly":[3.0,0.0,14.0,14.0,21.0],"target_sum":52.0,"overstock_monthly":[9.0,41.0,78.0,115.0,128.0],"overstock_sum":371.0,"lowes_monthly":[15.0,16.0,57.0,71.0,79.0],"lowes_sum":238.0,"walmart_monthly":[0.0,0.0,15.0,21.0,36.0],"walmart_sum":72.0,"mom":37.3},{"name":"庭院家具套","total_monthly":[211.0,391.0,903.0,1240.0,1332.0],"total_sum":4077.0,"amazon_US_monthly":[95.0,153.0,514.0,560.0,624.0],"amazon_US_sum":1946.0,"shopify_US_monthly":[83.0,146.0,240.0,325.0,455.0],"shopify_US_sum":1249.0,"wayfair_US_monthly":[8.0,8.0,37.0,20.0,26.0],"wayfair_US_sum":99.0,"homedepot_monthly":[1.0,34.0,28.0,111.0,47.0],"homedepot_sum":221.0,"target_monthly":[0.0,0.0,0.0,0.0,18.0],"target_sum":18.0,"overstock_monthly":[18.0,50.0,64.0,207.0,142.0],"overstock_sum":481.0,"lowes_monthly":[6.0,0.0,20.0,17.0,20.0],"lowes_sum":63.0,"walmart_monthly":[0.0,0.0,0.0,0.0,0.0],"walmart_sum":0.0,"mom":7.4},{"name":"户外存储","total_monthly":[50.0,50.0,97.0,116.0,134.0],"total_sum":447.0,"amazon_US_monthly":[16.0,25.0,38.0,61.0,82.0],"amazon_US_sum":222.0,"shopify_US_monthly":[25.0,16.0,30.0,35.0,20.0],"shopify_US_sum":126.0,"wayfair_US_monthly":[6.0,3.0,6.0,5.0,3.0],"wayfair_US_sum":23.0,"homedepot_monthly":[1.0,5.0,23.0,13.0,28.0],"homedepot_sum":70.0,"target_monthly":[0.0,0.0,0.0,0.0,0.0],"target_sum":0.0,"overstock_monthly":[1.0,1.0,0.0,0.0,0.0],"overstock_sum":2.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[1.0,0.0,0.0,2.0,1.0],"walmart_sum":4.0,"mom":15.5},{"name":"样品","total_monthly":[6.0,16.0,50.0,59.0,74.0],"total_sum":205.0,"amazon_US_monthly":[5.0,13.0,39.0,48.0,52.0],"amazon_US_sum":157.0,"shopify_US_monthly":[0.0,3.0,6.0,8.0,19.0],"shopify_US_sum":36.0,"wayfair_US_monthly":[1.0,0.0,0.0,0.0,1.0],"wayfair_US_sum":2.0,"homedepot_monthly":[0.0,0.0,3.0,0.0,0.0],"homedepot_sum":3.0,"target_monthly":[0.0,0.0,1.0,0.0,0.0],"target_sum":1.0,"overstock_monthly":[0.0,0.0,0.0,3.0,2.0],"overstock_sum":5.0,"lowes_monthly":[0.0,0.0,0.0,0.0,0.0],"lowes_sum":0.0,"walmart_monthly":[0.0,0.0,1.0,0.0,0.0],"walmart_sum":1.0,"mom":25.4}];
 
