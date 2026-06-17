@@ -88,6 +88,10 @@ tr:hover td:first-child {background:#f0f7ff}
 .admin-debug-content.show{display:block}
 .admin-reset-btn{font-size:11px;color:#ef4444;background:none;border:1px solid #fecaca;border-radius:4px;padding:3px 10px;cursor:pointer;margin-top:12px;transition:all .2s}
 .admin-reset-btn:hover{background:#fef2f2;border-color:#fca5a5}
+.login-debug{display:none;position:fixed;top:0;left:0;right:0;z-index:10001;padding:10px 20px;font-size:13px;text-align:center;color:#fff;line-height:1.4}
+.login-debug.ok{display:block;background:#16a34a}
+.login-debug.err{display:block;background:#dc2626}
+.admin-debug-content{max-height:300px;white-space:pre-wrap}
 
 </style>
 </script>
@@ -106,6 +110,7 @@ tr:hover td:first-child {background:#f0f7ff}
     <div class="login-desc">Contact admin if you need access</div>
   </div>
 </div>
+<div class="login-debug" id="loginDebug"></div>
 <div class="user-bar" id="userBar" style="display:none">
   
   <span class="user-name" id="userName"></span>
@@ -268,6 +273,14 @@ function initUsers(){
   return users;
 }
 
+function showLoginDebug(msg,type){
+  var el=document.getElementById('loginDebug');
+  if(!el)return;
+  el.className='login-debug '+(type||'err');
+  el.textContent=msg;
+  setTimeout(function(){el.className='login-debug';el.textContent='';},8000);
+}
+
 function doLogin(){
   var emailEl=document.getElementById('loginEmail');
   var passEl=document.getElementById('loginPassword');
@@ -275,17 +288,28 @@ function doLogin(){
   var email=norm(emailEl.value);
   var pass=passEl.value;
   errEl.textContent='';
-  if(!email){errEl.textContent='Please enter your email.';return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){errEl.textContent='Invalid email format.';return;}
-  if(!pass){errEl.textContent='Please enter your password.';return;}
+  if(!email){var m='Please enter your email.';errEl.textContent=m;showLoginDebug(m,'err');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){var m='Invalid email format.';errEl.textContent=m;showLoginDebug(m,'err');return;}
+  if(!pass){var m='Please enter your password.';errEl.textContent=m;showLoginDebug(m,'err');return;}
   var whitelist=loadWhitelist();
-  if(whitelist.indexOf(email)===-1){errEl.textContent='Account is not authorized.';return;}
+  if(whitelist.indexOf(email)===-1){
+    var m='Account is not authorized. Current whitelist: ['+whitelist.join(', ')+']';
+    errEl.textContent=m;showLoginDebug(m,'err');return;
+  }
   var users=initUsers();
   var storedHash=users[email];
-  if(!storedHash){errEl.textContent='No password set for this account. Contact admin.';return;}
+  if(!storedHash){
+    var keys=Object.keys(users);
+    var m='No password set for this account. Users with passwords: ['+(keys.length?keys.join(', '):'none')+']';
+    errEl.textContent=m;showLoginDebug(m,'err');return;
+  }
   var inputHash=sha256(pass);
-  if(inputHash!==storedHash){errEl.textContent='Incorrect password.';return;}
+  if(inputHash!==storedHash){
+    var m='Incorrect password (input: '+inputHash.substring(0,12)+'..., stored: '+storedHash.substring(0,12)+'...)';
+    errEl.textContent=m;showLoginDebug(m,'err');return;
+  }
   localStorage.setItem(SESSION_KEY,JSON.stringify({email:email,loginTime:Date.now()}));
+  showLoginDebug('Login OK - '+email,'ok');
   showUser(email);
 }
 
@@ -382,9 +406,35 @@ function renderWhitelist(){
   }
 
   var debugContent=document.getElementById('adminDebugContent');
-  var raw=localStorage.getItem(WHITELIST_KEY);
-  debugContent.textContent=raw||'(empty)';
-  debugContent.classList.remove('show');
+  var lines=[];
+  lines.push('=== DIAGNOSTIC INFO ===');
+  var rawW=localStorage.getItem(WHITELIST_KEY);
+  lines.push('[pl_whitelist] '+(rawW||'(empty)'));
+  var rawU=localStorage.getItem(USERS_KEY);
+  if(rawU){
+    try{
+      var usersObj=JSON.parse(rawU);
+      var masked={};
+      for(var k in usersObj){masked[k]=usersObj[k]?usersObj[k].substring(0,12)+'...':'(empty)';}
+      lines.push('[pl_users] '+JSON.stringify(masked));
+    }catch(ex){lines.push('[pl_users] RAW: '+rawU.substring(0,80));}
+  }else{lines.push('[pl_users] (empty)');}
+  var rawS=localStorage.getItem(SESSION_KEY);
+  lines.push('[pl_session] '+rawS.substring(0,100)+(rawS&&rawS.length>100?'...':''));
+  var total=0;
+  var perKey=[];
+  for(var i=0;i<localStorage.length;i++){
+    var k=localStorage.key(i);
+    var v=localStorage.getItem(k)||'';
+    var sz=v.length;
+    total+=sz;
+    perKey.push(k+': '+sz+' chars');
+  }
+  lines.push('[keys] '+perKey.join(' | '));
+  lines.push('[total] ~'+total+' chars (~'+(total/1048576).toFixed(3)+' MB)');
+  debugContent.textContent=lines.join('
+');
+  debugContent.classList.add('show');
 }
 
 function addToWhitelist(){
@@ -399,10 +449,22 @@ function addToWhitelist(){
   var whitelist=loadWhitelist();
   if(whitelist.indexOf(email)!==-1){alert('This email is already in the whitelist.');return;}
   whitelist.push(email);
-  saveWhitelist(whitelist);
+  try{
+    saveWhitelist(whitelist);
+    alert('Step 1/2: Email added to whitelist.');
+  }catch(ex){alert('FAILED: Could not save whitelist - '+ex.message);return;}
   var users=initUsers();
   users[email]=sha256(pass);
-  saveUsers(users);
+  try{
+    saveUsers(users);
+    alert('Step 2/2: Password saved. User '+email+' is now active.');
+  }catch(ex){
+    alert('FAILED: Could not save password. Storage may be full.
+Error: '+ex.message+'
+
+Try clearing cache in Debug panel.');
+    return;
+  }
   input.value='';
   if(passInput)passInput.value='';
   renderWhitelist();
